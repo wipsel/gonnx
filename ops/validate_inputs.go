@@ -8,7 +8,7 @@ import (
 // When there are fewer input nodes then the given max, the list is padded with nils.
 // Expects either 1 requirement ==> the expected number of inputs, or 2 requirements,
 // the minimum and the maximum number of inputs.
-func ValidateInputs(op Operator, inputs []tensor.Tensor) ([]tensor.Tensor, error) {
+func ValidateInputs(op BaseOperator, inputs []tensor.Tensor) ([]tensor.Tensor, error) {
 	padLength, err := checkNInputs(op, inputs)
 	if err != nil {
 		return inputs, err
@@ -24,25 +24,25 @@ func ValidateInputs(op Operator, inputs []tensor.Tensor) ([]tensor.Tensor, error
 	return inputs, nil
 }
 
-func checkNInputs(op Operator, inputs []tensor.Tensor) (int, error) {
+func checkNInputs(op BaseOperator, inputs []tensor.Tensor) (int, error) {
 	nInputs := len(inputs)
 	padLength := 0
 
-	min := op.GetMinInputs()
-	max := op.GetMaxInputs()
+	minInputs := op.GetMinInputs()
+	maxInputs := op.GetMaxInputs()
 
-	if min == max {
-		if nInputs != min {
+	if minInputs == maxInputs {
+		if nInputs != minInputs {
 			return 0, ErrInvalidInputCount(nInputs, op)
 		}
 
-		padLength = min
+		padLength = minInputs
 	} else {
-		if nInputs < min || nInputs > max {
+		if nInputs < minInputs || nInputs > maxInputs {
 			return 0, ErrInvalidOptionalInputCount(nInputs, op)
 		}
 
-		padLength = max
+		padLength = maxInputs
 	}
 
 	return padLength, nil
@@ -57,7 +57,7 @@ func padInputs(inputs []tensor.Tensor, length int) []tensor.Tensor {
 	return inputs
 }
 
-func checkInputTypes(op Operator, inputs []tensor.Tensor) error {
+func checkInputTypes(op BaseOperator, inputs []tensor.Tensor) error {
 	typeConstraints := op.GetInputTypeConstraints()
 
 	for i, input := range inputs {

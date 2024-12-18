@@ -44,7 +44,7 @@ test_ci: ## Run tests using normal test runner for ci output.
 
 test_data:  ## Creates test data from the ONNX test module.
 	rm -R ./test_data; mkdir ./test_data; touch ./test_data/
-	git clone --depth 1 --branch v1.15.0 https://github.com/onnx/onnx.git temp_onnx
+	git clone --depth 1 --branch v1.17.0 https://github.com/onnx/onnx.git temp_onnx
 	cp -r temp_onnx/onnx/backend/test/data/node/* ./test_data
 	rm -Rf temp_onnx
 
@@ -58,7 +58,7 @@ install: ## Install project with its depedencies.
 
 install_lint: ## Install the linter.
 	curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh \
-		| sh -s -- -b $(shell go env GOPATH)/bin v1.50.1
+		| sh -s -- -b $(shell go env GOPATH)/bin v1.61.0
 
 install_gotestsum: ## Install a tool for prettier test output.
 	curl -sfL https://github.com/gotestyourself/gotestsum/releases/download/v1.9.0/gotestsum_1.9.0_linux_amd64.tar.gz \

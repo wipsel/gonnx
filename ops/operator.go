@@ -5,6 +5,18 @@ import (
 	"gorgonia.org/tensor"
 )
 
+type OperatorVersions map[int64]OperatorFactory
+
+type OperatorFactory func() Operator
+
+type Constructor func(int, [][]tensor.Dtype) Operator 
+
+func NewOperatorConstructor(fn Constructor, version int, typeContstraint [][]tensor.Dtype) OperatorFactory {
+	return func() Operator {
+		return fn(version, typeContstraint) 
+	}
+}
+
 // Operator is the base interface for all operators.
 type Operator interface {
 	// String should return a simple string describing the operator
@@ -33,4 +45,7 @@ type Operator interface {
 	// ValidateInputs should validate the list of input tensors. It should check for both
 	// the right amount of inputs and the correct dtypes of the tensors.
 	ValidateInputs([]tensor.Tensor) ([]tensor.Tensor, error)
+
+	// Version returns the version of this operator.
+	Version() int
 }
