@@ -19,6 +19,7 @@ import (
 	"github.com/advancedclimatesystems/gonnx/ops/conv"
 	"github.com/advancedclimatesystems/gonnx/ops/cos"
 	"github.com/advancedclimatesystems/gonnx/ops/cosh"
+	"github.com/advancedclimatesystems/gonnx/ops/cumsum"
 	"github.com/advancedclimatesystems/gonnx/ops/div"
 	"github.com/advancedclimatesystems/gonnx/ops/equal"
 	"github.com/advancedclimatesystems/gonnx/ops/erf"
@@ -60,6 +61,7 @@ import (
 	"github.com/advancedclimatesystems/gonnx/ops/tanh"
 	"github.com/advancedclimatesystems/gonnx/ops/transpose"
 	"github.com/advancedclimatesystems/gonnx/ops/unsqueeze"
+	"github.com/advancedclimatesystems/gonnx/ops/where"
 	"github.com/advancedclimatesystems/gonnx/ops/xor"
 )
 
@@ -89,6 +91,7 @@ var operators = map[string]ops.OperatorVersions{
 	"Conv":            conv.GetVersions(),
 	"Cos":             cos.GetVersions(),
 	"Cosh":            cosh.GetVersions(),
+	"CumSum":          cumsum.GetVersions(),
 	"Div":             div.GetVersions(),
 	"Equal":           equal.GetVersions(),
 	"Erf":             erf.GetVersions(),
@@ -131,6 +134,7 @@ var operators = map[string]ops.OperatorVersions{
 	"Transpose":       transpose.GetVersions(),
 	"Unsqueeze":       unsqueeze.GetVersions(),
 	"Xor":             xor.GetVersions(),
+        "Where": where.GetVersions(),
 }
 
 // GetClosestOperatorVersion resolves, given a certain opset version, the operator version that is closest
