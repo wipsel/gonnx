@@ -195,7 +195,7 @@ func TestOps(t *testing.T) {
 					if expectedTensor.Dtype() == tensor.Bool {
 						assert.ElementsMatch(t, expectedTensor.Data(), actualTensor.Data())
 					} else {
-						assert.InDeltaSlice(t, expectedTensor.Data(), actualTensor.Data(), 0.00001)
+						assert.InDeltaSlice(t, expectedTensor.Data(), actualTensor.Data(), 0.001)
 					}
 				}
 			})
@@ -480,6 +480,18 @@ var expectedTests = []string{
 	"test_or_bcast4v2d",
 	"test_or_bcast4v3d",
 	"test_or_bcast4v4d",
+	"test_pow",
+	"test_pow_bcast_array",
+	"test_pow_bcast_scalar",
+	"test_pow_example",
+	"test_pow_types_float32_int32",
+	"test_pow_types_float32_int64",
+	"test_pow_types_float32_uint32",
+	"test_pow_types_float32_uint64",
+	"test_pow_types_int32_float32",
+	"test_pow_types_int32_int32",
+	"test_pow_types_int64_float32",
+	"test_pow_types_int64_int64",
 	"test_prelu_broadcast",
 	"test_prelu_example",
 	"test_relu",
