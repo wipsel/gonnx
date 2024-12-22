@@ -19,6 +19,7 @@ import (
 	"github.com/advancedclimatesystems/gonnx/ops/conv"
 	"github.com/advancedclimatesystems/gonnx/ops/cos"
 	"github.com/advancedclimatesystems/gonnx/ops/cosh"
+	"github.com/advancedclimatesystems/gonnx/ops/cumsum"
 	"github.com/advancedclimatesystems/gonnx/ops/div"
 	"github.com/advancedclimatesystems/gonnx/ops/equal"
 	"github.com/advancedclimatesystems/gonnx/ops/erf"
@@ -89,6 +90,7 @@ var operators = map[string]ops.OperatorVersions{
 	"Conv":            conv.GetConvVersions(),
 	"Cos":             cos.GetCosVersions(),
 	"Cosh":            cosh.GetCoshVersions(),
+	"CumSum":          cumsum.GetVersions(),
 	"Div":             div.GetDivVersions(),
 	"Equal":           equal.GetEqualVersions(),
 	"Erf":             erf.GetVersions(),
